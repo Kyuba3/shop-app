@@ -3,9 +3,10 @@ import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { PrismaModule } from 'src/prisma/prisma.module';
 import { UsersModule } from 'src/users/users.module';
+import { LocalStrategy } from './local.strategy';
 
 @Module({
-  providers: [AuthService],
+  providers: [AuthService, LocalStrategy],
   controllers: [AuthController],
   imports: [PrismaModule, UsersModule],
 })
