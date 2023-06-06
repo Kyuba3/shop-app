@@ -1,8 +1,13 @@
+import { Container } from "react-bootstrap";
+import AllProducts from "../../features/AllProducts/AllProducts";
+import styles from './Home.module.scss';
 
 
 const Home = () => {
   return(
-    <h1> Home </h1>
+    <Container className={styles.body}>
+      <AllProducts />
+    </Container>
   )
 }
 
