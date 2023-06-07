@@ -9,11 +9,14 @@ import { faShoppingBasket } from '@fortawesome/free-solid-svg-icons';
 const NavBar = () => {
 
   const user = useSelector(getUser);
-  console.log(user);
 
   return (
     <Navbar bg="dark" variant='dark' expand="lg" className="mt-4 mb-4 rounded d-flex justify-content-between">
-      <NavbarBrand className="justify-content-start px-3">ShopAPP</NavbarBrand>
+      <NavbarBrand className="justify-content-start px-3">
+        <NavLink to="/" className={styles.nav_links}>
+          ShopAPP
+        </NavLink>
+      </NavbarBrand>
         <Nav className="flex-sm-column flex-md-row px-3">
           <ul className={styles.nav_links}>
             <li>
@@ -51,7 +54,7 @@ const NavBar = () => {
               )}
             </li>
             <li>
-              {!user && (
+              {user && (
                 <NavLink
                   className={({ isActive }) =>
                       isActive ? styles.linkActive : undefined
@@ -63,7 +66,7 @@ const NavBar = () => {
               )}
             </li>
             <li>
-              {!user && (
+              {user && (
                 <NavLink
                 className={({ isActive }) => 
                   isActive ? styles.linkActive : undefined

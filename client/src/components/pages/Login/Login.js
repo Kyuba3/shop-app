@@ -30,9 +30,9 @@ const Login = () => {
     setStatus('loading');
     fetch(`${API_URL}auth/login`, options)
       .then(res => {
-        if (res.status === 200){
+        if (res.status === 201 || res.status === 200){
           setStatus('success');
-          dispatch(logIn({ email }));
+          dispatch(logIn({ email, password }));
           setTimeout(() => {
             navigate('/');
           }, 1000);

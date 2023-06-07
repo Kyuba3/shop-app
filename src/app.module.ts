@@ -25,7 +25,7 @@ import * as cors from 'cors';
 export class AppModule {
   configure(consumer: MiddlewareConsumer): void {
     consumer
-      .apply(cors({ credentials: true, origin: 'http://localhost:3000' }))
+      .apply(cors({ credentials: true, origin: 'http://localhost:3001' }))
       .forRoutes({
         path: '*',
         method: RequestMethod.ALL,

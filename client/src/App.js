@@ -9,6 +9,7 @@ import NotFound from "./components/pages/NotFound/NotFound";
 import Register from "./components/pages/Register/Register";
 import Login from "./components/pages/Login/Login";
 import Logout from "./components/pages/Logout/Logout";
+import Cart from "./components/pages/Cart/Cart";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
+        <Route path="/cart" element={<Cart />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

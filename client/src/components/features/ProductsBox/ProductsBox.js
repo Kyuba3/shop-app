@@ -2,9 +2,7 @@ import { Card, Col, Row, Button } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import styles from './ProductsBox.module.scss';
 
-
 const ProductBox = ({ name, price, description, id }) => {
-
 
   return (
     <Card className={styles.card_wrapper}>
