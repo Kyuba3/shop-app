@@ -88,12 +88,12 @@ const Register = () => {
         <Form.Control type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Enter email" />
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formEmail">
+      <Form.Group className="mb-3" controlId="formPassword">
         <Form.Label>Password</Form.Label>
         <Form.Control type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Enter password" />
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formEmail">
+      <Form.Group className="mb-3" controlId="formPasswordRepeat">
         <Form.Label>Repeat password</Form.Label>
         <Form.Control type="password" value={passwordRepeat} onChange={e => setPasswordRepeat(e.target.value)} placeholder="Repeat password" />
       </Form.Group>

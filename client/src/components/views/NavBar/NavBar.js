@@ -1,8 +1,83 @@
-import { Container } from "react-bootstrap";
+import { Navbar, Nav, NavbarBrand } from "react-bootstrap";
+import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { getUser } from "../../../redux/usersRedux";
+import styles from './NavBar.module.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingBasket } from '@fortawesome/free-solid-svg-icons';
 
 const NavBar = () => {
-  <Container>
-  </Container>
+
+  const user = useSelector(getUser);
+  console.log(user);
+
+  return (
+    <Navbar bg="dark" variant='dark' expand="lg" className="mt-4 mb-4 rounded d-flex justify-content-between">
+      <NavbarBrand className="justify-content-start px-3">ShopAPP</NavbarBrand>
+        <Nav className="flex-sm-column flex-md-row px-3">
+          <ul className={styles.nav_links}>
+            <li>
+              <NavLink
+                className={({ isActive }) =>
+                isActive ? styles.linkActive : undefined
+                }
+                to="/"
+              >
+                Home
+              </NavLink>
+            </li>
+            <li>
+              {!user && (
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? styles.linkActive : undefined
+                  }
+                  to="/login"
+                  >
+                    Sign in
+                </NavLink>
+              )}
+            </li>
+            <li>
+              {!user && (
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? styles.linkActive : undefined
+                  }
+                  to="/register"
+                  >
+                    Register
+                </NavLink>
+              )}
+            </li>
+            <li>
+              {!user && (
+                <NavLink
+                  className={({ isActive }) =>
+                      isActive ? styles.linkActive : undefined
+                  }
+                  to="/logout"
+                  >
+                    Logout
+                </NavLink>
+              )}
+            </li>
+            <li>
+              {!user && (
+                <NavLink
+                className={({ isActive }) => 
+                  isActive ? styles.linkActive : undefined
+                }
+                to="/cart"
+                >
+                  <FontAwesomeIcon className={styles.icon} icon={faShoppingBasket} />
+                </NavLink> 
+              )}
+            </li>
+        </ul>    
+      </Nav>
+    </Navbar>
+  )
 }
 
 export default NavBar;
