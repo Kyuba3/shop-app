@@ -1,6 +1,6 @@
 const initialState = {
   products: [],
-  cart: [],
+  cart: JSON.parse(localStorage.getItem('cartItems')) || [],
   user: null,
 };
 

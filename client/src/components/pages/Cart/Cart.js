@@ -1,11 +1,12 @@
 import { useSelector, useDispatch } from "react-redux";
 import { Container, Card, Form, Button } from "react-bootstrap";
 import { removeProduct, updateQuantity } from "../../../redux/cartRedux";
-
+import { getUser } from "../../../redux/usersRedux";
 
 const Cart = () => {
 
   const productsInCart = useSelector((state) => state.cart);
+  const user = useSelector(getUser);
   const dispatch = useDispatch();
 
   const handleRemoveProduct = (productId) => {
@@ -14,6 +15,28 @@ const Cart = () => {
 
   const handleQuantityChange = (productId, newQuantity) => {
     dispatch(updateQuantity(productId, newQuantity));
+  }
+
+  if(productsInCart.length === 0) {
+    localStorage.clear('cartItems');
+  }
+
+  if(!user) {
+    return (
+      <Container className="d-flex justify-content-center">
+        <Card >
+          <Card.Text className="d-flex justify-content-center mt-4 mx-4">
+            Log in or register to make shopping!
+          </Card.Text>
+          <Button variant="dark" href="/login" className="mt-2 mx-4">
+            Go to Login Page
+          </Button>
+          <Button variant="dark" href="/register" className="mt-2 mx-4 my-4">
+            Go to Register Page
+          </Button>
+        </Card>
+      </Container>
+    )
   }
 
   return (

@@ -10,8 +10,10 @@ import Register from "./components/pages/Register/Register";
 import Login from "./components/pages/Login/Login";
 import Logout from "./components/pages/Logout/Logout";
 import Cart from "./components/pages/Cart/Cart";
+import OrderSummary from "./components/pages/OrderSummary/OrderSummary";
 
 const App = () => {
+
   return (
     <Container>
       <Header />
@@ -22,6 +24,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/order-summary" element={<OrderSummary />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

@@ -1,10 +1,29 @@
+.productWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+}
+
 .card_wrapper {
-  background-color: rgb(175, 112, 112);
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(255, 255, 255);
   border-style: 1px solid black;
   height: 100%;
 }
 
-.body {
-  height: 8rem;
-  margin: 10px;
+.card_wrapper .body {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
   }
+
+.imagesRow {
+  height: 350px;
+}
+
+.image {
+  object-fit: contain;
+}
+
