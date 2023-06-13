@@ -8,6 +8,8 @@ import { ConfigModule } from '@nestjs/config';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { ProductsInCartModule } from './products-in-cart/products-in-cart.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 import configuration from './config/configuration';
 import * as cors from 'cors';
 
@@ -20,6 +22,9 @@ import * as cors from 'cors';
     UsersModule,
     AuthModule,
     ProductsInCartModule,
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '../../', 'client', 'build'),
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],

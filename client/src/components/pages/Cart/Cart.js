@@ -55,13 +55,15 @@ const Cart = () => {
 
             return (
             <div key={product.id}>
-              <Card.Text>
-                <span className={styles.name}>Name: {product.name}</span>
-                <CardImg 
-                  src={product.image} 
-                  className={styles.cardImage} 
-                />
-              </Card.Text>
+              <div className={`${styles.productItem} w-100`}>
+                <Card.Text className={`${styles.productText} w-100`}>
+                  <span className={styles.name}>Name: {product.name}</span>
+                  <CardImg 
+                    src={product.image} 
+                    className={styles.cardImage} 
+                  />
+                </Card.Text>
+              </div>
               <Card.Text>
                 <span className={styles.price}>Price: {product.price}$</span>
               </Card.Text>

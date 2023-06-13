@@ -12,7 +12,7 @@ const OrderSummary = () => {
   const userEmail = user.email;
   const [address, setAdrress] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [notesForCourier, setNotesForCourier] = useState('');
+  const [notesForCurier, setNotesForCurier] = useState('');
   const [status, setStatus] = useState(null);
   const dispatch = useDispatch();
     
@@ -32,20 +32,20 @@ const OrderSummary = () => {
           'Content-Type': 'application/json',
         },
         credentials: 'include',
-        body: JSON.stringify({ address, phoneNumber, userId }),
-      })
-      .then(res => {
-        if(res.status === 200 || res.status === 201){
-          setStatus('success');
-        } else if (res.status === 400) {
-          setStatus('clientError');
-        } else {
-          setStatus('serverError');
-        }
+        body: JSON.stringify({ address, phoneNumber, notesForCurier, userId }),
       });
 
-      const order = await orderResponse.json();
-      const orderId = order.id;
+      let orderId = '';
+
+      if (orderResponse.status === 200 || orderResponse.status === 201) {
+        setStatus('success');
+        const order = await orderResponse.json();
+        orderId = order.id;
+      } else if ( orderResponse.status === 400) {
+        setStatus('clientError');
+      } else {
+        setStatus('serverError');
+      }
 
       productsInCart.forEach(async (product) => {
         const { comment, quantity, id } = product;
@@ -66,13 +66,11 @@ const OrderSummary = () => {
             }
           }
         );
-      }).catch(err => {
-        setStatus('serverError');
       });
 
       setAdrress("");
       setPhoneNumber("");
-      setNotesForCourier("");
+      setNotesForCurier("");
       dispatch(removeAllProducts());
       
     } catch (err) {
@@ -143,21 +141,21 @@ const OrderSummary = () => {
               <Form.Control
                 type="text"
                 maxLength={12}
-                placeholder="+() 000000000"
+                placeholder="123-456-789"
                 name="phoneNumber"
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
               />
             </Form.Group>
-            <Form.Group controlId="notesForCourier">
+            <Form.Group controlId="notesForCurier">
               <Form.Label>Notes for courier</Form.Label>
               <Form.Control
                 as="textarea"
                 type="text"
-                name="notesForCourier"
+                name="notesForCurier"
                 placeholder="floor, gate..."
-                value={notesForCourier}
-                onChange={(e) => setNotesForCourier(e.target.value)}
+                value={notesForCurier}
+                onChange={(e) => setNotesForCurier(e.target.value)}
               />
             </Form.Group>
             {user && (

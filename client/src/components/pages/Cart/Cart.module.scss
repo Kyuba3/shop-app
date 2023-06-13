@@ -5,6 +5,24 @@
   flex-direction: column;
 }
 
+.productItem {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cardImage {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  object-position: center;
+}
+
+.productText {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .orderButton {
   border-radius: 5px;
   background-color: #333;
@@ -25,13 +43,6 @@
 
 .orderButton:hover {
   background-color: #555;
-}
-
-.cardImage {
-  object-fit: contain;
-  width: 50px;
-  height: 50px;
-  margin-left: 20px;
 }
 
 .price {
