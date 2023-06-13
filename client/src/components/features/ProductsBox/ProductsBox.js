@@ -11,8 +11,8 @@ const ProductBox = ({ name, price, id, image }) => {
       <Card className={styles.card_wrapper}>
         <Card.Body>
           <div className={styles.body}>
-            <Card.Title>Price: {price}$</Card.Title>
-            <Card.Subtitle className="my-3">
+            <Card.Title className={styles.cardTitle}>Price: {price}$</Card.Title>
+            <Card.Subtitle className={`my-3 ${styles.cardSubtitle}`}>
               <b>Name: {name}</b>
             </Card.Subtitle>
             <hr></hr>
@@ -24,7 +24,7 @@ const ProductBox = ({ name, price, id, image }) => {
           <Row>
             <Col>
               <Link to={'/product/' + id}>
-                <Button className="mt-2" variant='dark'>
+                <Button className="mt-2 w-100" variant='dark'>
                   About this product <FontAwesomeIcon icon={faCircleInfo} className="mx-2"/>
                 </Button>
               </Link>

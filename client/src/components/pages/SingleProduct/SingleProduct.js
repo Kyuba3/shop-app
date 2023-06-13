@@ -8,11 +8,13 @@ import { addProduct } from "../../../redux/cartRedux";
 import { getAll } from "../../../redux/cartRedux";
 import { getUser } from "../../../redux/usersRedux";
 import styles from './SingleProduct.module.scss';
+import moment from "moment";
 
 
 const SingleProduct = () => {
 
   const [quantity, setQuantity] = useState(1);
+  // eslint-disable-next-line no-unused-vars
   const [comment, setComment] = useState("");
   const productId = useParams();
   const id = productId.id
@@ -55,15 +57,15 @@ const SingleProduct = () => {
       <Col xs="12" lg="5" className={`mt-2 ${styles.productCard}`}>
         <Card>
           <Card.Body>
-            <Card.Title className="py-2"> Price: {productData.price}$</Card.Title>
+            <Card.Title className={`py-2 ${styles.price}`}> Price: {productData.price}$</Card.Title>
             <Card.Subtitle>
-              <b>Name: {productData.name}</b>
+              <span className={styles.name}>Name: {productData.name}</span>
             </Card.Subtitle>
             <Card.Text>
-              <b>Description: {productData.description}</b>
+              <span className={styles.description}>Description: {productData.description}</span>
             </Card.Text>
             <Card.Text>
-              <b>CreatedAt: {productData.createdAt}</b>
+              <span className={styles.createdAt}>CreatedAt: {moment(productData.createdAt).format("YYYY-MM-DD")}</span>
             </Card.Text>
             <Row>
               <img src={productData.image} alt="ProductImage" className={styles.productImage} />
@@ -73,7 +75,7 @@ const SingleProduct = () => {
                 <Form.Label>Quantity :</Form.Label>
                 <div className={`d-flex align-items-center ${styles.quantityInput}`}>
                   <Button
-                    variant="dark"
+                    variant="danger"
                     onClick={decreaseQuantity}>
                     -
                   </Button>
@@ -85,14 +87,14 @@ const SingleProduct = () => {
                     className={styles.quantityField}
                   ></Form.Control>
                   <Button
-                    variant="dark"
+                    variant="success"
                     onClick={increaseQuantity}>
                     +
                   </Button>
                 </div>
               </Form.Group>
               {user && (
-                <Button variant="dark" type="submit" className={`my-3 py-3 ${styles.addButon}`}>
+                <Button variant="dark" type="submit" className={`my-3 py-3 ${styles.addButon} w-100`}>
                   Add to cart
                 </Button>
               )}

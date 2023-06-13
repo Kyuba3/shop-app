@@ -98,7 +98,7 @@ const Register = () => {
         <Form.Control type="password" value={passwordRepeat} onChange={e => setPasswordRepeat(e.target.value)} placeholder="Repeat password" />
       </Form.Group>
 
-      <Button variant="dark" type="submit" className="mb-3">
+      <Button variant="dark" type="submit" className="mb-3 w-50">
         Submit
       </Button>
 

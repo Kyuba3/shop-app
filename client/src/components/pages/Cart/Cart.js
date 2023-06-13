@@ -56,14 +56,14 @@ const Cart = () => {
             return (
             <div key={product.id}>
               <Card.Text>
-                <b>Name: {product.name}</b>
+                <span className={styles.name}>Name: {product.name}</span>
                 <CardImg 
                   src={product.image} 
                   className={styles.cardImage} 
                 />
               </Card.Text>
               <Card.Text>
-                <b>Price: {product.price}$</b>
+                <span className={styles.price}>Price: {product.price}$</span>
               </Card.Text>
               <Form.Group controlId={`description-${product.id}`}>
                 <Form.Label>Comments</Form.Label>
@@ -118,14 +118,14 @@ const Cart = () => {
             <Container className={styles.container}>
               <p>Your cart is empty.</p>
               <NavLink to="/" className={styles.linkToHome}>
-                <Button variant="success" className={styles.goToHomeButton}>Go to Home Page</Button>
+                <Button variant="success" className={`w-100 ${styles.goToHomeButton}`}>Go to Home Page</Button>
               </NavLink>
             </Container>
           )}
           <NavLink to={{
             pathname: "/order",
           }}>
-            <Button variant="dark" className={`px-2 py-2 ${styles.orderButton}`}>
+            <Button variant="dark" className={`px-2 py-2 ${styles.orderButton} w-100`}>
               Go to Order Summary
             </Button>
           </NavLink>
