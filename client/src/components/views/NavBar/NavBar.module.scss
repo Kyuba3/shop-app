@@ -31,3 +31,23 @@
   display: inline-flex;
   justify-content: flex-end;
 }
+
+.cartCounter {
+  margin: 3px 0 0 5px;
+}
+
+.animate {
+  animation: pulse 0.7s ease-out;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.7);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1.0);
+  }
+}

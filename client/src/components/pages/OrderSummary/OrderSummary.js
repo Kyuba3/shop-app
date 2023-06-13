@@ -1,20 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAll, removeAllProducts } from "../../../redux/cartRedux";
 import { Container, Card, Form, Button, Alert } from "react-bootstrap";
-import { API_URL } from "../../../config";
-import { getUser } from "../../../redux/usersRedux";
+import { API_URL } from "../../../config";;
 
 const OrderSummary = () => {
 
   const productsInCart = useSelector(getAll);
-  const user = useSelector(getUser);
-  const userEmail = user.email;
+  const [user, setUser] = useState(null);
   const [address, setAdrress] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [notesForCurier, setNotesForCurier] = useState('');
   const [status, setStatus] = useState(null);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
+  const userEmail = user ? user.email : "";
+  console.log(userEmail);
+  console.log(user);
     
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -61,18 +70,18 @@ const OrderSummary = () => {
         .then(res => {
             if(res.status === 200 || res.status === 201){
               setStatus('success');
-            } else {
+              setAdrress("");
+              setPhoneNumber("")
+              setNotesForCurier("")
+              dispatch(removeAllProducts());
+            } else if (res.status === 400) {
+              setStatus('clientError');
+            }else {
               setStatus('serverError');
             }
           }
         );
-      });
-
-      setAdrress("");
-      setPhoneNumber("");
-      setNotesForCurier("");
-      dispatch(removeAllProducts());
-      
+      });     
     } catch (err) {
       setStatus('serverError')
       console.log(err);
@@ -132,6 +141,7 @@ const OrderSummary = () => {
                 as="textarea"
                 name="address"
                 value={address}
+                maxLength={50}
                 placeholder="Country, street, zipCode..."
                 onChange={(e) => setAdrress(e.target.value)}
               />
@@ -141,6 +151,7 @@ const OrderSummary = () => {
               <Form.Control
                 type="text"
                 maxLength={12}
+                minLength={9}
                 placeholder="123-456-789"
                 name="phoneNumber"
                 value={phoneNumber}
@@ -151,6 +162,7 @@ const OrderSummary = () => {
               <Form.Label>Notes for courier</Form.Label>
               <Form.Control
                 as="textarea"
+                maxLength={50}
                 type="text"
                 name="notesForCurier"
                 placeholder="floor, gate..."
@@ -158,11 +170,16 @@ const OrderSummary = () => {
                 onChange={(e) => setNotesForCurier(e.target.value)}
               />
             </Form.Group>
-            {user && (
-              <Button variant="dark" type="submit" className="mt-3">
+            {status !== 'success' && (
+              <Button variant="dark" type="submit" className="mt-3 w-100">
                 Order
               </Button>
             )}
+            {status === 'success' && ( 
+              <Button variant="success" type="submit" className="mt-3 w-100" href="/">
+                Go back to home page
+              </Button>
+            )} 
           </Form>
         </Card.Body>
       </Card>

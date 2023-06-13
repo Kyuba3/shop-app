@@ -32,11 +32,17 @@ export const loadProductsRequest = () => {
   };
 };
 
+export const saveProductsToLocalStorage = (products) => {
+  localStorage.setItem('products', JSON.stringify(products));
+}
+
 // reducer
 const productsReducer = (statePart = [], action) => {
   switch (action.type) {
     case LOAD_PRODUCTS:
-      return [...action.payload];
+      const newState = [...action.payload]; 
+      saveProductsToLocalStorage(newState);
+      return newState;
     default:
       return statePart;
   };

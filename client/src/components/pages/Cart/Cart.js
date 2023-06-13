@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { Container, Card, Form, Button, CardImg } from "react-bootstrap";
+import { Container, Card, Form, Button, CardImg, Row } from "react-bootstrap";
 import { removeProduct, updateQuantity, updateComment} from "../../../redux/cartRedux";
 import { getUser } from "../../../redux/usersRedux";
 import { NavLink } from "react-router-dom";
@@ -117,12 +117,12 @@ const Cart = () => {
           })}
           
           {productsInCart.length === 0 && (
-            <Container className={styles.container}>
-              <p>Your cart is empty.</p>
+            <>
+              <Row className="d-flex justify-content-center my-2">Your cart is empty.</Row>
               <NavLink to="/" className={styles.linkToHome}>
                 <Button variant="success" className={`w-100 ${styles.goToHomeButton}`}>Go to Home Page</Button>
               </NavLink>
-            </Container>
+            </>
           )}
           <NavLink to={{
             pathname: "/order",

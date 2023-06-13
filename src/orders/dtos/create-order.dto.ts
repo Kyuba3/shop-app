@@ -11,8 +11,9 @@ export class CreateOrderDTO {
 
   @IsNotEmpty()
   @IsString()
-  @Length(1, 12)
+  @Length(9, 12)
   phoneNumber: string;
 
+  @IsString()
   notesForCurier: string;
 }

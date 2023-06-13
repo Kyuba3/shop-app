@@ -5,12 +5,11 @@ import { getUser } from "../../../redux/usersRedux";
 import styles from './NavBar.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingBasket } from '@fortawesome/free-solid-svg-icons';
-import { getCount } from "../../../redux/cartRedux";
+import CartCounter from "../../features/CartCounter/CartCounter";
 
 const NavBar = () => {
 
   const user = useSelector(getUser);
-  const countingCartProducts = useSelector(getCount);
 
   return (
     <Navbar bg="dark" variant='dark' expand="lg" className="mt-4 mb-4 rounded d-flex justify-content-between">
@@ -78,7 +77,7 @@ const NavBar = () => {
               </NavLink>
             </li>
             <li>
-              <div className="mt-1 px-1">{countingCartProducts}</div>
+              <CartCounter />
             </li>
         </ul>    
       </Nav>

@@ -49,7 +49,9 @@ const cartReducer = (statePart = [], action) => {
       );
     }
     case REMOVE_ALL_PRODUCTS:
-      return [];
+      const removedState = [];
+      saveCartToLocalStorage(removedState);
+      return removedState;
     default:
       return statePart;
   };
