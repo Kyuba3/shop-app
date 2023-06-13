@@ -7,6 +7,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { ConfigModule } from '@nestjs/config';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { ProductsInCartModule } from './products-in-cart/products-in-cart.module';
 import configuration from './config/configuration';
 import * as cors from 'cors';
 
@@ -18,6 +19,7 @@ import * as cors from 'cors';
     ConfigModule.forRoot({ load: [configuration], isGlobal: true }),
     UsersModule,
     AuthModule,
+    ProductsInCartModule,
   ],
   controllers: [AppController],
   providers: [AppService],

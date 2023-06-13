@@ -1,7 +1,9 @@
 import { useSelector, useDispatch } from "react-redux";
-import { Container, Card, Form, Button } from "react-bootstrap";
-import { removeProduct, updateQuantity } from "../../../redux/cartRedux";
+import { Container, Card, Form, Button, CardImg } from "react-bootstrap";
+import { removeProduct, updateQuantity, updateComment} from "../../../redux/cartRedux";
 import { getUser } from "../../../redux/usersRedux";
+import { NavLink } from "react-router-dom";
+import styles from './Cart.module.scss';
 
 const Cart = () => {
 
@@ -17,6 +19,10 @@ const Cart = () => {
     dispatch(updateQuantity(productId, newQuantity));
   }
 
+  const handleCommentChange = (productId, newComment) => {
+    dispatch(updateComment(productId, newComment));
+  }
+
   if(productsInCart.length === 0) {
     localStorage.clear('cartItems');
   }
@@ -28,10 +34,10 @@ const Cart = () => {
           <Card.Text className="d-flex justify-content-center mt-4 mx-4">
             Log in or register to make shopping!
           </Card.Text>
-          <Button variant="dark" href="/login" className="mt-2 mx-4">
+          <Button variant="success" href="/login" className="mt-2 mx-4">
             Go to Login Page
           </Button>
-          <Button variant="dark" href="/register" className="mt-2 mx-4 my-4">
+          <Button variant="warning" href="/register" className="mt-2 mx-4 my-4">
             Go to Register Page
           </Button>
         </Card>
@@ -43,7 +49,7 @@ const Cart = () => {
     <Container className="d-flex justify-content-center">
       <Card>
         <Card.Body>
-          <Card.Title>Cart</Card.Title>
+          <Card.Title className="d-flex justify-content-center">Cart</Card.Title>
           {productsInCart.map((product) => {
             const totalPrice = product.price * product.quantity;
 
@@ -51,6 +57,10 @@ const Cart = () => {
             <div key={product.id}>
               <Card.Text>
                 <b>Name: {product.name}</b>
+                <CardImg 
+                  src={product.image} 
+                  className={styles.cardImage} 
+                />
               </Card.Text>
               <Card.Text>
                 <b>Price: {product.price}$</b>
@@ -58,14 +68,18 @@ const Cart = () => {
               <Form.Group controlId={`description-${product.id}`}>
                 <Form.Label>Comments</Form.Label>
                 <Form.Control
+                  value={product.comment}
                   as="textarea"
                   rows={3}
                   placeholder="Enter description"
+                  onChange={(e) => 
+                    handleCommentChange(product.id, e.target.value)
+                  }
                 />
               </Form.Group>
               <Form.Group controlId={`quantity-${product.id}`}>
                 <Form.Label>Quantity</Form.Label>
-                <div className="d-flex">
+                <div className="d-flex align-items-center">
                   <Button
                     variant="dark"
                     onClick={() => 
@@ -99,10 +113,22 @@ const Cart = () => {
             </div>
             );
           })}
-          {productsInCart.length === 0 && <p>Your cart is empty.</p>}
-          <Button variant="dark" href="/order-summary">
-            Go to Order Summary
-          </Button>
+          
+          {productsInCart.length === 0 && (
+            <Container className={styles.container}>
+              <p>Your cart is empty.</p>
+              <NavLink to="/" className={styles.linkToHome}>
+                <Button variant="success" className={styles.goToHomeButton}>Go to Home Page</Button>
+              </NavLink>
+            </Container>
+          )}
+          <NavLink to={{
+            pathname: "/order",
+          }}>
+            <Button variant="dark" className={`px-2 py-2 ${styles.orderButton}`}>
+              Go to Order Summary
+            </Button>
+          </NavLink>
         </Card.Body>
       </Card>
     </Container>

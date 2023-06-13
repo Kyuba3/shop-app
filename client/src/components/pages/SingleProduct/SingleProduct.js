@@ -13,6 +13,7 @@ import styles from './SingleProduct.module.scss';
 const SingleProduct = () => {
 
   const [quantity, setQuantity] = useState(1);
+  const [comment, setComment] = useState("");
   const productId = useParams();
   const id = productId.id
   const productData = useSelector(state => getProductById(state, id));
@@ -23,7 +24,7 @@ const SingleProduct = () => {
   const handleAddProduct = e => {
     e.preventDefault();
 
-    const productToAdd = { ...productData, quantity };
+    const productToAdd = { ...productData, quantity, comment };
 
     const isProductInCart = productsInCart.some(product => product.id === productToAdd.id);
     if(isProductInCart) {

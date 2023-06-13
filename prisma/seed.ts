@@ -47,17 +47,17 @@ function getOrders() {
     {
       id: 'fd105551-0f0d-4a9f-bc41-c559c8a17260',
       address: '123 Main Street, London',
-      productId: 'fd105551-0f0d-4a9f-bc41-c559c8a17256',
+      userId: 'fd105551-0f0d-4a9f-bc41-c559c8a17256',
     },
     {
       id: 'fd105551-0f0d-4a9f-bc41-c559c8a17261',
       address: '123 Main Street, London',
-      productId: 'fd105551-0f0d-4a9f-bc41-c559c8a17256',
+      userId: 'fd105551-0f0d-4a9f-bc41-c559c8a17256',
     },
     {
       id: 'fd105551-0f0d-4a9f-bc41-c559c8a17262',
       address: 'Baker Street 12B, New York',
-      productId: '01c7599d-318b-4b9f-baf7-51f3a936a2d4',
+      userId: '01c7599d-318b-4b9f-baf7-51f3a936a2d4',
     },
   ];
 }
@@ -70,12 +70,12 @@ async function seed() {
   );
 
   await Promise.all(
-    getOrders().map(({ productId, ...orderData }) => {
+    getOrders().map(({ userId, ...orderData }) => {
       return db.order.create({
         data: {
           ...orderData,
-          product: {
-            connect: { id: productId },
+          user: {
+            connect: { id: userId },
           },
         },
       });

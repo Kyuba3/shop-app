@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../../../config";
 import { logOut } from "../../../redux/usersRedux";
+import { removeAllProducts } from "../../../redux/cartRedux";
 
 
 const Logout = () => {
@@ -21,6 +22,7 @@ const Logout = () => {
     fetch(`${API_URL}auth/logout`, options)
       .then(() => {
         dispatch(logOut());
+        dispatch(removeAllProducts());
         navigate('/');
       })
       .catch(err => {

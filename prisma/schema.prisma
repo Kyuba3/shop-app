@@ -19,22 +19,39 @@ model Product {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  orders Order[]
+  productsInOrder Products_In_Order[]
 }
 
 model Order {
   id String @id @default(uuid())
-  product Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
-  productId String?
   address String
-  
+  user User @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  userId String
+  phoneNumber String? 
+  notesForCurier String?
+ 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  productsInOrder Products_In_Order[]
 }
+
 
 enum Role {
   USER
   ADMIN
+}
+
+model Products_In_Order {
+  order Order? @relation(fields: [orderId], references: [id])
+  orderId String
+  product Product? @relation(fields: [productId], references: [id])
+  productId String
+
+  quantity Int
+  comment String?
+  @@id([orderId, productId])
+
 }
 
 model User {
@@ -42,11 +59,12 @@ model User {
   email String @unique
   role Role @default(USER)
   password Password?
+  orders Order[]
 }
 
 model Password {
   id String @id @default(uuid())
   hashedPassword String
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId String @unique
+  userId String  @unique
 }

@@ -14,7 +14,7 @@ const AllProducts = () => {
   }, [dispatch]);
 
   return (
-    <Row xs={1} md={3} className="g-3 ">
+    <Row xs={1} md={2} xl={3} className="g-3 ">
         {products.map((product) => (
           <Col key={product.id}>
             <ProductBox {...product} />
