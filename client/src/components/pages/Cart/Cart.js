@@ -16,7 +16,7 @@ const Cart = () => {
   };
 
   const handleQuantityChange = (productId, newQuantity) => {
-    if (newQuantity <=0) {
+    if (newQuantity <=0 || isNaN(newQuantity)) {
       return;
     }
     dispatch(updateQuantity(productId, newQuantity));
