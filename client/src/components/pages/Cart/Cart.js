@@ -16,6 +16,9 @@ const Cart = () => {
   };
 
   const handleQuantityChange = (productId, newQuantity) => {
+    if (newQuantity <=0) {
+      return;
+    }
     dispatch(updateQuantity(productId, newQuantity));
   }
 

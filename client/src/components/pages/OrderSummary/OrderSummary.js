@@ -141,7 +141,7 @@ const OrderSummary = () => {
                 as="textarea"
                 name="address"
                 value={address}
-                maxLength={50}
+                maxLength={200}
                 placeholder="Country, street, zipCode..."
                 onChange={(e) => setAdrress(e.target.value)}
               />

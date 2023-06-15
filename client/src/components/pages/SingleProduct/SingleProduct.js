@@ -26,6 +26,10 @@ const SingleProduct = () => {
   const handleAddProduct = e => {
     e.preventDefault();
 
+    if( quantity <= 0 ) {
+      alert('You cant order 0 products!');
+    }
+
     const productToAdd = { ...productData, quantity, comment };
 
     const isProductInCart = productsInCart.some(product => product.id === productToAdd.id);
@@ -81,7 +85,7 @@ const SingleProduct = () => {
                   </Button>
                   <Form.Control
                     type="number"
-                    min="1"
+                    min={1}
                     value={quantity}
                     onChange={(e) => setQuantity(parseInt(e.target.value))}
                     className={styles.quantityField}
