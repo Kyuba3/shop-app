@@ -2,6 +2,7 @@ import { useState } from "react"
 import { API_URL } from "../../../config";
 import Form from 'react-bootstrap/Form'
 import { Alert, Button, Spinner } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 
 const Register = () => {
@@ -10,6 +11,7 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [passwordRepeat, setPasswordRepeat] = useState('');
   const [status, setStatus] = useState(null);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,6 +33,9 @@ const Register = () => {
       .then(res => {
         if (res.status === 201){
           setStatus('success');
+          setTimeout(() => {
+            navigate('/login');
+          }, 3000);
         } else if (res.status === 400){
           setStatus('clientError');
         } else if (res.status === 409){
@@ -52,7 +57,7 @@ const Register = () => {
       {status === 'success' && (
         <Alert variant="success">
           <Alert.Heading>Success!</Alert.Heading>
-          <p>You have been successfully registered! You can now log in...</p>
+          <p>You have been successfully registered! You will be directed to Login page in a few seconds</p>
         </Alert>
       )}
 
