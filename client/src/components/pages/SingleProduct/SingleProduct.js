@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { getProductById } from "../../../redux/productsRedux";
 import { useParams } from "react-router-dom";
 import { Col, Container, Card, Button, Form, Spinner, Row } from "react-bootstrap";
 import { useDispatch } from "react-redux";
@@ -9,19 +8,45 @@ import { getAll } from "../../../redux/cartRedux";
 import { getUser } from "../../../redux/usersRedux";
 import styles from './SingleProduct.module.scss';
 import moment from "moment";
+import { API_URL } from "../../../config";
 
 
 const SingleProduct = () => {
 
+  const productId = useParams();
+  const id = productId.id
+  const dispatch = useDispatch();
+  
   const [quantity, setQuantity] = useState(1);
   // eslint-disable-next-line no-unused-vars
   const [comment, setComment] = useState("");
-  const productId = useParams();
-  const id = productId.id
-  const productData = useSelector(state => getProductById(state, id));
-  const dispatch = useDispatch();
+  const [productData, setProductData] = useState({});
+  const [productError, setProductError] = useState(false);
+  const [productLoading, setProductLoading] = useState(true);
+
   const productsInCart = useSelector(getAll);
   const user = useSelector(getUser);
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const response = await fetch(`${API_URL}products/${id}`);
+        if (response.ok) {
+          const product = await response.json();
+          setProductData(product);
+          setProductLoading(false);
+        } else {
+          setProductError(true);
+          setProductLoading(false);
+        }
+      } catch (error) {
+        console.log(error);
+        setProductError(true);
+        setProductLoading(false);
+      }
+    };
+    fetchProduct();
+  }, [id]);
 
   const handleAddProduct = e => {
     e.preventDefault();
@@ -52,9 +77,11 @@ const SingleProduct = () => {
     }
   };
 
-  if (!productData) {
-    return <Spinner></Spinner>
-  } else 
+  if (productLoading) {
+    return <Spinner animation="border" role="status" className="d-block mx-auto"/>
+  } else if (productError) {
+    return <Container> Failed to load product data.</Container>;
+  } 
 
   return (
     <Container className="d-flex justify-content-center">
