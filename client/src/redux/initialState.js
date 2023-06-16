@@ -1,7 +1,7 @@
 const initialState = {
   products: [],
-  cart: JSON.parse(localStorage.getItem(process.env.CART_ITEMS)) || [],
-  user: JSON.parse(localStorage.getItem(process.env.USER)) || null,
+  cart: JSON.parse(localStorage.getItem('cartItems')) || [],
+  user: JSON.parse(localStorage.getItem('user')) || null,
 };
 
 export default initialState;

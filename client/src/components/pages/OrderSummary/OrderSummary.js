@@ -15,7 +15,7 @@ const OrderSummary = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const storedUser = localStorage.getItem(process.env.USER);
+    const storedUser = localStorage.getItem('user');
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }

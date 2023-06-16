@@ -33,7 +33,7 @@ export const loadProductsRequest = () => {
 };
 
 export const saveProductsToLocalStorage = (products) => {
-  localStorage.setItem(process.env.PRODUCTS, JSON.stringify(products));
+  localStorage.setItem('products', JSON.stringify(products));
 }
 
 // reducer
