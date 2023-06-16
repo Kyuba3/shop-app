@@ -27,7 +27,7 @@ const Cart = () => {
   }
 
   if(productsInCart.length === 0) {
-    localStorage.clear('cartItems');
+    localStorage.clear(process.env.CART_ITEMS);
   }
 
   if(!user) {

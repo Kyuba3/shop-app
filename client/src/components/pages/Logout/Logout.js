@@ -17,7 +17,7 @@ const Logout = () => {
       credentials: 'include',
     };
 
-    localStorage.clear('cartItems');
+    localStorage.clear(process.env.CART_ITEMS);
 
     fetch(`${API_URL}auth/logout`, options)
       .then(() => {

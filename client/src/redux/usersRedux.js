@@ -9,7 +9,7 @@ const LOGOUT = createActionName('LOGOUT');
 // action creators
 export const logIn = payload => {
   
-  localStorage.setItem('user', JSON.stringify(payload));
+  localStorage.setItem(process.env.USER, JSON.stringify(payload));
 
   return {
     type: LOG_IN,
@@ -27,8 +27,8 @@ const usersReducer = (statePart = null, action) => {
     case LOG_IN:
       return action.payload;
     case LOGOUT:
-      localStorage.clear('user');
-      localStorage.clear('cartItem');
+      localStorage.clear(process.env.USER);
+      localStorage.clear(process.env.CART_ITEMS);
       return null;
     default:
       return statePart;

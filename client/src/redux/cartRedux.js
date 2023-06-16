@@ -20,7 +20,7 @@ export const updateComment = ( id, comment ) => ({ payload: { id, comment }, typ
 export const removeAllProducts = () => ({ type: REMOVE_ALL_PRODUCTS });
 
 const saveCartToLocalStorage = cart => {
-  localStorage.setItem('cartItems', JSON.stringify(cart));
+  localStorage.setItem(process.env.CART_ITEMS, JSON.stringify(cart));
 }
 
 
