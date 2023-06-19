@@ -9,14 +9,14 @@ import { getUser } from "../../../redux/usersRedux";
 import styles from './SingleProduct.module.scss';
 import moment from "moment";
 import { API_URL } from "../../../config";
-
+import QuantitySelector from "../../features/QuantitySelector/QuantitySelector";
 
 const SingleProduct = () => {
 
   const productId = useParams();
-  const id = productId.id
   const dispatch = useDispatch();
-  
+
+  const id = productId.id
   const [quantity, setQuantity] = useState(1);
   // eslint-disable-next-line no-unused-vars
   const [comment, setComment] = useState("");
@@ -68,7 +68,6 @@ const SingleProduct = () => {
 
   const increaseQuantity = () => {
     setQuantity(quantity + 1);
-    console.log(productsInCart);
   };
 
   const decreaseQuantity = () => {
@@ -84,7 +83,7 @@ const SingleProduct = () => {
   } 
 
   return (
-    <Container className="d-flex justify-content-center">
+    <Container fluid="true" className="d-flex justify-content-center">
       <Col xs="12" lg="5" className={`mt-2 ${styles.productCard}`}>
         <Card>
           <Card.Body>
@@ -103,26 +102,13 @@ const SingleProduct = () => {
             </Row>
             <Form onSubmit={handleAddProduct}>
               <Form.Group controlId="quantity">
-                <Form.Label>Quantity :</Form.Label>
-                <div className={`d-flex align-items-center ${styles.quantityInput}`}>
-                  <Button
-                    variant="danger"
-                    onClick={decreaseQuantity}>
-                    -
-                  </Button>
-                  <Form.Control
-                    type="number"
-                    min={1}
-                    value={quantity}
+                <Form.Label>Quantity : </Form.Label>
+                  <QuantitySelector 
+                    quantity={quantity}
+                    onDecrease={decreaseQuantity}
+                    onIncrease={increaseQuantity}
                     onChange={(e) => setQuantity(parseInt(e.target.value))}
-                    className={styles.quantityField}
-                  ></Form.Control>
-                  <Button
-                    variant="success"
-                    onClick={increaseQuantity}>
-                    +
-                  </Button>
-                </div>
+                  />
               </Form.Group>
               {user && (
                 <Button variant="dark" type="submit" className={`my-3 py-3 ${styles.addButon} w-100`}>

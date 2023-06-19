@@ -6,13 +6,15 @@ import { API_URL } from "../../../config";;
 
 const OrderSummary = () => {
 
-  const productsInCart = useSelector(getAll);
+  const dispatch = useDispatch();
+
   const [user, setUser] = useState(null);
   const [address, setAdrress] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [notesForCurier, setNotesForCurier] = useState('');
   const [status, setStatus] = useState(null);
-  const dispatch = useDispatch();
+  
+  const productsInCart = useSelector(getAll);
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
@@ -22,8 +24,6 @@ const OrderSummary = () => {
   }, []);
 
   const userEmail = user ? user.email : "";
-  console.log(userEmail);
-  console.log(user);
     
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -109,30 +109,29 @@ const OrderSummary = () => {
       <Card>
         <Card.Body>
           <Card.Title>Order Summary</Card.Title>
-          <Card.Text>{renderOrderSummary()}</Card.Text>
+          <Card.Subtitle className="py-4">{renderOrderSummary()}</Card.Subtitle>
           <Form onSubmit={handleSubmit}>
 
-          {status === "success" && (
-            <Alert variant="success">
-              <Alert.Heading>Success!</Alert.Heading>
-              <p>Your order has been successfully created</p>
-            </Alert>
-          )}
+            {status === "success" && (
+              <Alert variant="success">
+                <Alert.Heading>Success!</Alert.Heading>
+                <p>Your order has been successfully created</p>
+              </Alert>
+            )}
 
-          {status === "serverError" && (
-            <Alert variant="danger">
-              <Alert.Heading>Something went wrong...</Alert.Heading>
-              <p>Unexpected err... Try again</p>
-            </Alert>
-          )}
+            {status === "serverError" && (
+              <Alert variant="danger">
+                <Alert.Heading>Something went wrong...</Alert.Heading>
+                <p>Unexpected err... Try again</p>
+              </Alert>
+            )}
 
-          {status === "clientError" && (
-            <Alert variant="danger">
-              <Alert.Heading>Incorrect data</Alert.Heading>
-              <p>address or phone number are incorrect...</p>
-            </Alert>
-          )}
-
+            {status === "clientError" && (
+              <Alert variant="danger">
+                <Alert.Heading>Incorrect data</Alert.Heading>
+                <p>address or phone number are incorrect...</p>
+              </Alert>
+            )}
 
             <Form.Group controlId="address">
               <Form.Label>Address</Form.Label>

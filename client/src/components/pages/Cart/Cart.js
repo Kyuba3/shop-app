@@ -4,12 +4,17 @@ import { removeProduct, updateQuantity, updateComment} from "../../../redux/cart
 import { getUser } from "../../../redux/usersRedux";
 import { NavLink } from "react-router-dom";
 import styles from './Cart.module.scss';
+import QuantitySelector from "../../features/QuantitySelector/QuantitySelector";
 
 const Cart = () => {
 
   const productsInCart = useSelector((state) => state.cart);
   const user = useSelector(getUser);
   const dispatch = useDispatch();
+
+  console.log(user);
+  console.log(localStorage.getItem('user'));
+
 
   const handleRemoveProduct = (productId) => {
     dispatch(removeProduct(productId));
@@ -27,7 +32,7 @@ const Cart = () => {
   }
 
   if(productsInCart.length === 0) {
-    localStorage.clear('cartItems');
+    localStorage.removeItem('cartItems');
   }
 
   if(!user) {
@@ -84,25 +89,12 @@ const Cart = () => {
               </Form.Group>
               <Form.Group controlId={`quantity-${product.id}`}>
                 <Form.Label>Quantity</Form.Label>
-                <div className="d-flex align-items-center">
-                  <Button
-                    variant="dark"
-                    onClick={() => 
-                      handleQuantityChange(product.id, product.quantity - 1)
-                    }
-                  >
-                    -
-                  </Button>
-                  <Form.Control type="number" min="1" value={product.quantity} onChange={(e) => handleQuantityChange(product.id, parseInt(e.target.value))}/>
-                  <Button
-                    variant="dark"
-                    onClick={() =>
-                      handleQuantityChange(product.id, product.quantity + 1)
-                    }
-                  >
-                    +
-                  </Button>
-                </div>
+                <QuantitySelector
+                  quantity={product.quantity}
+                  onDecrease={() => handleQuantityChange(product.id, product.quantity - 1)}
+                  onIncrease={() => handleQuantityChange(product.id, product.quantity + 1)}
+                  onChange={(e) => handleQuantityChange(product.id, parseInt(e.target.value))}
+                />
               </Form.Group>
               <Card.Text className="mt-2">
                 <b>Total price: {totalPrice}$</b>

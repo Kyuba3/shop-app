@@ -23,7 +23,6 @@ const saveCartToLocalStorage = cart => {
   localStorage.setItem('cartItems', JSON.stringify(cart));
 }
 
-
 const cartReducer = (statePart = [], action) => {
   switch (action.type) {
     case ADD_PRODUCT:
