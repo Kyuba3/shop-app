@@ -4,7 +4,7 @@ import { Button, Form } from "react-bootstrap";
 const QuantitySelector = ({ quantity, onDecrease, onIncrease, onChange }) => {
   return (
     <div className="d-flex align-items-center">
-      <Button variant="danger" onClick={onDecrease}>
+      <Button variant="secondary" onClick={onDecrease}>
         -
       </Button>
       <Form.Control
@@ -13,7 +13,7 @@ const QuantitySelector = ({ quantity, onDecrease, onIncrease, onChange }) => {
         value={quantity}
         onChange={onChange}
       />
-      <Button variant="success" onClick={onIncrease}>
+      <Button variant="secondary" onClick={onIncrease}>
         +
       </Button>
     </div>

@@ -12,10 +12,6 @@ const Cart = () => {
   const user = useSelector(getUser);
   const dispatch = useDispatch();
 
-  console.log(user);
-  console.log(localStorage.getItem('user'));
-
-
   const handleRemoveProduct = (productId) => {
     dispatch(removeProduct(productId));
   };
@@ -60,6 +56,8 @@ const Cart = () => {
           <Card.Title className="d-flex justify-content-center">Cart</Card.Title>
           {productsInCart.map((product) => {
             const totalPrice = product.price * product.quantity;
+            const photo = product.image.split(",");
+            const firstPhoto = photo[0];
 
             return (
             <div key={product.id}>
@@ -67,7 +65,7 @@ const Cart = () => {
                 <Card.Text className={`${styles.productText} w-100`}>
                   <span className={styles.name}>Name: {product.name}</span>
                   <CardImg 
-                    src={product.image} 
+                    src={firstPhoto} 
                     className={styles.cardImage} 
                   />
                 </Card.Text>

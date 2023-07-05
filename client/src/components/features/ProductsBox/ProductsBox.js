@@ -6,6 +6,9 @@ import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 
 const ProductBox = ({ name, price, id, image }) => {
 
+  const photo = image.split(",");
+  const firstPhoto = photo[0];
+
   return (
     <div className={styles.productWrapper}>
       <Card className={styles.card_wrapper}>
@@ -18,7 +21,7 @@ const ProductBox = ({ name, price, id, image }) => {
             <hr></hr>
           </div>
           <Row className={styles.imagesRow}>
-            <img src={image} alt="Camera" className={styles.image}/>
+            <img src={firstPhoto} alt="Camera" className={styles.image}/>
           </Row>
           <hr></hr>
           <Row>

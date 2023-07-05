@@ -10,6 +10,7 @@ import styles from './SingleProduct.module.scss';
 import moment from "moment";
 import { API_URL } from "../../../config";
 import QuantitySelector from "../../features/QuantitySelector/QuantitySelector";
+import Gallery from "../../features/Gallery/Gallery";
 
 const SingleProduct = () => {
 
@@ -26,6 +27,8 @@ const SingleProduct = () => {
 
   const productsInCart = useSelector(getAll);
   const user = useSelector(getUser);
+
+  
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -84,7 +87,7 @@ const SingleProduct = () => {
 
   return (
     <Container fluid="true" className="d-flex justify-content-center">
-      <Col xs="12" lg="5" className={`mt-2 ${styles.productCard}`}>
+      <Col xs="12" lg="6" className={`mt-2 ${styles.productCard}`}>
         <Card>
           <Card.Body>
             <Card.Title className={`py-2 ${styles.price}`}> Price: {productData.price}$</Card.Title>
@@ -98,7 +101,7 @@ const SingleProduct = () => {
               <span className={styles.createdAt}>CreatedAt: {moment(productData.createdAt).format("YYYY-MM-DD")}</span>
             </Card.Text>
             <Row>
-              <img src={productData.image} alt="ProductImage" className={styles.productImage} />
+              <Gallery photos={productData.image.split(",")} />
             </Row>
             <Form onSubmit={handleAddProduct}>
               <Form.Group controlId="quantity">
