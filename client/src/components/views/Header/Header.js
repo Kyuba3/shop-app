@@ -3,7 +3,7 @@ import NavBar from '../NavBar/NavBar';
 
 const Header = () => {
   return (
-    <Container>
+    <Container fluid>
       <NavBar />
     </Container>
   );

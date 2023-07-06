@@ -1,6 +1,6 @@
 .productCard {
   padding: 20px;
-  text-align: left;
+  text-align: center;
 }
 
 .productImage {
@@ -10,13 +10,13 @@
 }
 
 .price {
-  font-size: 1.5rem;
+  font-size: 4rem;
   font-weight: bold;
-  color: #555;
+  color: #2d2d2d;
 }
 
 .name {
-  font-size: 1.2rem;
+  font-size: 3.5rem;
   font-weight: bold;
   color: #555;
 }
@@ -24,11 +24,17 @@
 .description {
   color: #777;
   font-weight: 700;
+  font-size: 2.5rem;
 }
 
 .createdAt {
   margin-top: 0.5rem;
   color: #999;
+}
+
+.quantity {
+  display: flex;
+  font-size: 1.5rem;
 }
 
 .quantityInput {

@@ -14,10 +14,10 @@ const ProductBox = ({ name, price, id, image }) => {
       <Card className={styles.card_wrapper}>
         <Card.Body>
           <div className={styles.body}>
-            <Card.Title className={styles.cardTitle}>Price: {price}$</Card.Title>
-            <Card.Subtitle className={`my-3 ${styles.cardSubtitle}`}>
-              <b>Name: {name}</b>
-            </Card.Subtitle>
+            <Card.Text className={styles.cardTitle}>Price: {price}$</Card.Text>
+            <Card.Text className={`my-3 ${styles.cardSubtitle}`}>
+              <span>Name: {name}</span>
+            </Card.Text>
             <hr></hr>
           </div>
           <Row className={styles.imagesRow}>

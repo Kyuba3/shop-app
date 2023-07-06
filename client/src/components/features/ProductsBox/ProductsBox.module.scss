@@ -1,6 +1,7 @@
 .productWrapper {
   display: flex;
   flex-wrap: wrap;
+  text-align: center;
   height: 100%;
 }
 
@@ -20,7 +21,7 @@
   }
 
 .imagesRow {
-  height: 350px;
+  height: 500px;
 }
 
 .image {
@@ -33,9 +34,12 @@
  
 .cardTitle {
   font-weight: bold;
+  font-size: 2rem;
   color: #333;
+  margin-bottom: -10px;
 }
 
 .cardSubtitle{
   color: #555;
+  font-size: 1.5rem;
 }

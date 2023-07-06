@@ -15,7 +15,7 @@ import OrderSummary from "./components/pages/OrderSummary/OrderSummary";
 const App = () => {
 
   return (
-    <Container>
+    <Container fluid>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />

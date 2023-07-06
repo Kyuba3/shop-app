@@ -86,11 +86,11 @@ const SingleProduct = () => {
   } 
 
   return (
-    <Container fluid="true" className="d-flex justify-content-center">
-      <Col xs="12" lg="6" className={`mt-2 ${styles.productCard}`}>
+    <Container fluid className="d-flex justify-content-center">
+      <Col xs="12" lg="10" xl="6" className={`mt-2 ${styles.productCard}`}>
         <Card>
           <Card.Body>
-            <Card.Title className={`py-2 ${styles.price}`}> Price: {productData.price}$</Card.Title>
+            <Card.Text className={`py-2 ${styles.price}`}> Price: {productData.price}$</Card.Text>
             <Card.Subtitle>
               <span className={styles.name}>Name: {productData.name}</span>
             </Card.Subtitle>
@@ -105,7 +105,7 @@ const SingleProduct = () => {
             </Row>
             <Form onSubmit={handleAddProduct}>
               <Form.Group controlId="quantity">
-                <Form.Label>Quantity : </Form.Label>
+                <Form.Label className={styles.quantity}>Quantity : </Form.Label>
                   <QuantitySelector 
                     quantity={quantity}
                     onDecrease={decreaseQuantity}
