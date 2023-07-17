@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Button, Spinner } from "react-bootstrap";
+import { Card, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
@@ -36,9 +36,9 @@ const ProductBox = ({ name, price, id, image }) => {
           <Card.Title className={styles.cardTitle}>{name}</Card.Title>
           <Card.Text className={styles.cardSubtitle}>Price: {price}$</Card.Text>
           <Link to={`/product/${id}`}>
-            <Button variant="dark" className={`mt-2 ${styles.viewButton}`}>
+            <button className={`${styles.viewButton}`}>
               View Product <FontAwesomeIcon icon={faInfoCircle} className="mx-2" />
-            </Button>
+            </button>
           </Link>
         </Card.Body>
       </Card>

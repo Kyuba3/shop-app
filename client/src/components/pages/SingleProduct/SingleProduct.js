@@ -88,10 +88,10 @@ const SingleProduct = () => {
       <Col xs="12" lg="10" xl="10" className={`mt-1 ${styles.productCard}`}>
         <Card>
           <Card.Body className={styles.cardBody}>
-            <Card.Title className={`py-2 ${styles.price}`}>Price: {productData.price}$</Card.Title>
-            <Card.Subtitle>
+            <Card.Text className={`py-2 ${styles.price}`}>Price: {productData.price}$</Card.Text>
+            <Card.Text>
               <span className={styles.name}>Name: {productData.name}</span>
-            </Card.Subtitle>
+            </Card.Text>
             <Card.Text className={`mt-2 ${styles.description}`}>
               <span>Description: {productData.description}</span>
             </Card.Text>

@@ -55,9 +55,9 @@ const Cart = () => {
     <Container fluid className={styles.container}>
       <Card className={styles.cartCard}>
         <Card.Body>
-          <Card.Title className={styles.cartTitle}>
+          <Card.Text className={styles.cartTitle}>
             <FontAwesomeIcon className={styles.cartIcon} icon={faShoppingCart} /> Your Cart
-          </Card.Title>
+          </Card.Text>
           {productsInCart.map((product) => {
             const totalPrice = product.price * product.quantity;
             const photo = product.image.split(",");
@@ -97,20 +97,18 @@ const Cart = () => {
                   </div>
                 </div>
                 <div className={styles.actions}>
-                  <Button
-                    variant="danger"
+                  <button
                     onClick={() => handleRemoveProduct(product.id)}
                     className={styles.removeButton}
                   >
                     <FontAwesomeIcon icon={faTrashAlt} /> Remove
-                  </Button>
-                  <Button
-                    variant="success"
+                  </button>
+                  <NavLink
+                    to={`/product/${product.id}`}
                     className={styles.aboutButton}
-                    href={`/product/${product.id}`}
                   >
                     About this product
-                  </Button>
+                  </NavLink>
                 </div>
               </div>
             );
@@ -120,18 +118,18 @@ const Cart = () => {
             <div className={styles.emptyCart}>
               <p>Your cart is empty.</p>
               <NavLink to="/" className={styles.linkToHome}>
-                <Button variant="success" className={styles.goToHomeButton}>
+                <button className={styles.goToHomeButton}>
                   Go to Home Page
-                </Button>
+                </button>
               </NavLink>
             </div>
           )}
 
           <div className={styles.orderSummary}>
             <NavLink to="/order">
-              <Button variant="dark" className={styles.orderButton}>
+              <button variant="dark" className={styles.orderButton}>
                 Go to Order Summary
-              </Button>
+              </button>
             </NavLink>
           </div>
         </Card.Body>

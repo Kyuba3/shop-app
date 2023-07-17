@@ -1,10 +1,11 @@
 import React from "react";
 import { Button, Form } from "react-bootstrap";
+import styles from './QuantitySelector.module.scss';
 
 const QuantitySelector = ({ quantity, onDecrease, onIncrease, onChange }) => {
   return (
-    <div className="d-flex justify-content-center">
-      <Button variant="secondary" onClick={onDecrease}>
+    <div className={`d-flex justify-content-center ${styles.quantitySelector}`}>
+      <Button variant="secondary" onClick={onDecrease} className={styles.quantityButton}>
         -
       </Button>
       <Form.Control
@@ -12,9 +13,9 @@ const QuantitySelector = ({ quantity, onDecrease, onIncrease, onChange }) => {
         min={1}
         value={quantity}
         onChange={onChange}
-        className="w-75 justify-content-center text-align-center"
+        className={`w-75 ${styles.quantityInput}`}
       />
-      <Button variant="secondary" onClick={onIncrease}>
+      <Button variant="secondary" onClick={onIncrease} className={styles.quantityButton}>
         +
       </Button>
     </div>
