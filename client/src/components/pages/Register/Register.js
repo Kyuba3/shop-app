@@ -1,9 +1,9 @@
-import { useState } from "react"
+import React, { useState } from "react";
 import { API_URL } from "../../../config";
-import Form from 'react-bootstrap/Form'
-import { Alert, Button, Spinner } from "react-bootstrap";
+import Form from 'react-bootstrap/Form';
+import { Alert, Spinner } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-
+import styles from './Register.module.scss';
 
 const Register = () => {
 
@@ -38,10 +38,19 @@ const Register = () => {
           }, 3000);
         } else if (res.status === 400){
           setStatus('clientError');
+          setTimeout(() => {
+            setStatus(null);
+          }, 1500);
         } else if (res.status === 409){
           setStatus('emailError');
+          setTimeout(() => {
+            setStatus(null);
+          }, 1500);
         } else {
           setStatus('serverError');
+          setTimeout(() => {
+            setStatus(null);
+          }, 1500);
         }
       })
       .catch(err => {
@@ -50,62 +59,80 @@ const Register = () => {
   }
 
   return (
-    <Form className="col-12 col-sm-3 mx-auto" onSubmit={handleSubmit}>
+    <Form className={styles.registerForm} onSubmit={handleSubmit}>
 
-      <h1 className="my-4">Sign up</h1>
+      <h1 className={styles.registerTitle}>Sign up</h1>
 
       {status === 'success' && (
-        <Alert variant="success">
+        <Alert variant="success" className={styles.orderSuccessMessage}>
           <Alert.Heading>Success!</Alert.Heading>
           <p>You have been successfully registered! You will be directed to Login page in a few seconds</p>
         </Alert>
       )}
 
       {status === 'serverError' && (
-        <Alert variant="danger">
+        <Alert variant="danger" className={styles.orderErrorMessage}>
           <Alert.Heading>Something went wrong...</Alert.Heading>
           <p>Unexpected error... Try again!</p>
         </Alert>
       )}
 
       {status === 'clientError' && (
-        <Alert variant="danger">
+        <Alert variant="danger" className={styles.orderErrorMessage}>
           <Alert.Heading>No enought data</Alert.Heading>
           <p>You have to fill all the fields.</p>
         </Alert>
       )}
 
-      {status === 'loginError' && (
-        <Alert variant="warning">
+      {status === 'emailError' && (
+        <Alert variant="warning" className={styles.orderErrorMessage}>
           <Alert.Heading>Login already in use</Alert.Heading>
           <p>You have to use other login</p>
         </Alert>
       )}
 
       {status === 'loading' && (
-        <Spinner animation="border" role="status" className="d-flex justify-content-center block mx-auto">
+        <Spinner animation="border" role="status" className={styles.spinner}>
           <span className="visually-hidden">Loading...</span>
         </Spinner>
       )}
 
-      <Form.Group className="mb-3" controlId="formEmail">
-        <Form.Label>Email</Form.Label>
-        <Form.Control type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Enter email" />
+      <Form.Group controlId="formEmail" className={styles.formGroup}>
+        <Form.Label className={styles.formLabel}>Email</Form.Label>
+        <Form.Control
+          type="email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          placeholder="Enter email"
+          className={styles.formControl}
+        />
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Enter password" />
+      <Form.Group controlId="formPassword" className={styles.formGroup}>
+        <Form.Label className={styles.formLabel}>Password</Form.Label>
+        <Form.Control
+          type="password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+          placeholder="Enter password"
+          className={styles.formControl}
+        />
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formPasswordRepeat">
-        <Form.Label>Repeat password</Form.Label>
-        <Form.Control type="password" value={passwordRepeat} onChange={e => setPasswordRepeat(e.target.value)} placeholder="Repeat password" />
+      <Form.Group controlId="formPasswordRepeat" className={styles.formGroup}>
+        <Form.Label className={styles.formLabel}>Repeat password</Form.Label>
+        <Form.Control
+          type="password"
+          value={passwordRepeat}
+          onChange={e => setPasswordRepeat(e.target.value)}
+          placeholder="Repeat password"
+          className={styles.formControl}
+        />
       </Form.Group>
 
-      <Button variant="dark" type="submit" className="mb-3 w-50">
+      <button type="submit" className={styles.registerButton}>
         Submit
-      </Button>
+      </button>
 
     </Form>
   );

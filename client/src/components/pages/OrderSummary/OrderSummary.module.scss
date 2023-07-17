@@ -1,16 +1,21 @@
+.container{
+  display: flex;
+  justify-content: center;
+}
+
 .orderCard {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   max-width: 800px;
   margin-top: 50px;
-  padding: 20px;
+  padding: 30px;
 }
 
 .orderTitle {
   font-size: 36px;
   font-weight: bold;
-  color: #333;
   text-align: center;
   margin-bottom: 30px;
+  color: #555;
 }
 
 .orderSubtitle {
@@ -24,46 +29,6 @@
   font-size: 18px;
   color: #555;
   font-weight: bold;
-}
-
-.orderFormTextarea {
-  resize: none;
-  height: 100px;
-}
-
-.orderButtonWrapper {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-}
-
-.orderButton {
-  font-size: 18px;
-  font-weight: bold;
-  padding: 15px 30px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.2s, color 0.2s;
-  margin-right: 10px;
-}
-
-.orderButton.orderSuccess {
-  background-color: #66bb6a;
-  color: #fff;
-}
-
-.orderButton.orderSuccess:hover {
-  background-color: #43a047;
-}
-
-.orderButton.orderBack {
-  background-color: #333;
-  color: #fff;
-}
-
-.orderButton.orderBack:hover {
-  background-color: #111;
 }
 
 .orderSuccessMessage {
@@ -80,14 +45,42 @@
   margin-top: 20px;
 }
 
+.orderButtonWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
 .orderSubmitButton {
-  background-color: #333;
-  border-color: #333;
+  border: none;
+  border-radius: 8px;
   color: #fff;
+  background-color: #111;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 12px 40px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.orderSubmitButton:hover {
+  opacity: 0.8;
 }
 
 .orderBackButton {
-  background-color: #28a745;
-  border-color: #28a745;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
   color: #fff;
+  background-color: #66bb6a;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 12px 40px;
+  cursor: pointer;
+  margin-right: 10px;
 }
+
+.orderBackButton:hover {
+  opacity: 0.8;
+}
+

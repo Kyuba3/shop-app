@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { Col, Container, Card, Button, Form, Spinner, Row, Alert } from "react-bootstrap";
+import { NavLink, useParams } from "react-router-dom";
+import { Col, Container, Card, Form, Spinner, Row, Alert } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { addProduct } from "../../../redux/cartRedux";
 import { getAll } from "../../../redux/cartRedux";
@@ -78,13 +78,13 @@ const SingleProduct = () => {
   };
 
   if (productLoading) {
-    return <Spinner animation="border" role="status" className="d-block mx-auto" />;
+    return <Spinner animation="border" role="status" className={`d-block mx-auto ${styles.spinner}`} />;
   } else if (productError) {
-    return <Container> Failed to load product data.</Container>;
+    return <Container className={styles.container}> Failed to load product data.</Container>;
   }
 
   return (
-    <Container className={`d-flex justify-content-center ${styles.singleProductContainer}`}>
+    <Container className={`d-flex justify-content-center ${styles.container}`}>
       <Col xs="12" lg="10" xl="10" className={`mt-1 ${styles.productCard}`}>
         <Card>
           <Card.Body className={styles.cardBody}>
@@ -92,12 +92,12 @@ const SingleProduct = () => {
             <Card.Subtitle>
               <span className={styles.name}>Name: {productData.name}</span>
             </Card.Subtitle>
-            <Card.Text className="mt-2">
-              <span className={styles.description}>Description: {productData.description}</span>
+            <Card.Text className={`mt-2 ${styles.description}`}>
+              <span>Description: {productData.description}</span>
             </Card.Text>
 
             {status === "error" && (
-              <Alert variant="danger" className="">
+              <Alert variant="danger" className={`${styles.alert}`}>
                 <Alert.Heading>This Product is already in cart!</Alert.Heading>
                 <p>You can't add the same product</p>
               </Alert>
@@ -120,12 +120,12 @@ const SingleProduct = () => {
               </Form.Group>
               {user && (
                 <div className={styles.actions}>
-                  <Button variant="dark" type="submit" className={`my-3 py-3 w-50 ${styles.addButton}`}>
+                  <button className={`my-3 py-3 w-50 ${styles.addButton}`}>
                     Add to cart
-                  </Button>
-                  <Button variant="success" href="/cart" className={`my-3 py-3 w-50 ${styles.goToCartButton}`}>
+                  </button>
+                  <NavLink to="/cart" className={`my-3 py-3 w-50 ${styles.goToCartButton}`}>
                     Go to cart
-                  </Button>
+                  </NavLink>
                 </div>
               )}
               {!user && (

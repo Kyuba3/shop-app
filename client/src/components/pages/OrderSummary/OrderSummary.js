@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAll, removeAllProducts } from "../../../redux/cartRedux";
-import { Container, Card, Form, Button, Alert } from "react-bootstrap";
+import { Card, Form, Alert } from "react-bootstrap";
 import { API_URL } from "../../../config";
 import styles from './OrderSummary.module.scss';
+import { NavLink } from "react-router-dom";
 
 const OrderSummary = () => {
 
@@ -112,13 +113,13 @@ const OrderSummary = () => {
   };
 
   return (
-    <Container className="d-flex justify-content-center">
+    <div className={styles.container}>
       <Card className={styles.orderCard}>
         <Card.Body>
-          <Card.Title className={styles.orderTitle}>Order Summary</Card.Title>
-          <Card.Subtitle className={styles.orderSubtitle}>
+          <Card.Text className={styles.orderTitle}>Order Summary</Card.Text>
+          <Card.Text className={styles.orderSubtitle}>
             {renderOrderSummary()}
-          </Card.Subtitle>
+          </Card.Text>
           <Form onSubmit={handleSubmit}>
             {status === "success" && (
               <Alert variant="success" className={styles.orderSuccessMessage}>
@@ -179,18 +180,18 @@ const OrderSummary = () => {
             </Form.Group>
             {status !== 'success' && (
               <div className={styles.orderButtonWrapper}>
-                <Button variant="dark" type="submit" className={`${styles.orderButton} ${styles.orderSubmitButton}`}>
+                <button type="submit" className={styles.orderSubmitButton}>
                   Order
-                </Button>
-                <Button variant="success" href="/" className={`${styles.orderButton} ${styles.orderBackButton}`}>
+                </button>
+                <NavLink to="/" className={styles.orderBackButton}>
                   Go back to home page
-                </Button>
+                </NavLink>
               </div>
             )}
           </Form>
         </Card.Body>
       </Card>
-    </Container>
+    </div>
   );
 };
 

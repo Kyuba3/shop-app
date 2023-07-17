@@ -18,68 +18,68 @@ const NavBar = () => {
           ShopAPP
         </NavLink>
       </NavbarBrand>
-        <Nav className="flex-sm-column flex-md-row px-3">
-          <ul className={styles.nav_links}>
-            <li>
+      <Nav className="flex-sm-column flex-md-row px-3">
+        <ul className={styles.nav_links}>
+          <li>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? styles.linkActive : undefined
+              }
+              to="/"
+            >
+              Home
+            </NavLink>
+          </li>
+          <li>
+            {!user && (
               <NavLink
                 className={({ isActive }) =>
-                isActive ? styles.linkActive : undefined
-                }
-                to="/"
-              >
-                Home
-              </NavLink>
-            </li>
-            <li>
-              {!user && (
-                <NavLink
-                  className={({ isActive }) =>
-                    isActive ? styles.linkActive : undefined
-                  }
-                  to="/login"
-                  >
-                    Sign in
-                </NavLink>
-              )}
-            </li>
-            <li>
-              {!user && (
-                <NavLink
-                  className={({ isActive }) =>
-                    isActive ? styles.linkActive : undefined
-                  }
-                  to="/register"
-                  >
-                    Register
-                </NavLink>
-              )}
-            </li>
-            <li>
-              {user && (
-                <NavLink
-                  className={({ isActive }) =>
-                      isActive ? styles.linkActive : undefined
-                  }
-                  to="/logout"
-                  >
-                    Logout
-                </NavLink>
-              )}
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) => 
                   isActive ? styles.linkActive : undefined
                 }
-                to="/cart"
-                >
-                <FontAwesomeIcon className={styles.icon} icon={faShoppingBasket} />
+                to="/login"
+              >
+                Sign in
               </NavLink>
-            </li>
-            <li>
-              <CartCounter />
-            </li>
-        </ul>    
+            )}
+          </li>
+          <li>
+            {!user && (
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? styles.linkActive : undefined
+                }
+                to="/register"
+              >
+                Register
+              </NavLink>
+            )}
+          </li>
+          <li>
+            {user && (
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? styles.linkActive : undefined
+                }
+                to="/logout"
+              >
+                Logout
+              </NavLink>
+            )}
+          </li>
+          <li>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? styles.linkActive : undefined
+              }
+              to="/cart"
+            >
+              <FontAwesomeIcon className={styles.icon} icon={faShoppingBasket} />
+            </NavLink>
+          </li>
+          <li>
+            <CartCounter />
+          </li>
+        </ul>
       </Nav>
     </Navbar>
   )

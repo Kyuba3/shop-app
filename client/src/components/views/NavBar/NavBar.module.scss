@@ -3,11 +3,23 @@
 .nav_links {
     
     margin: 0;
+    padding: 0;
     list-style: none;
-    display: inline-flex;
+    display: flex;
     padding: 10px;
     text-decoration: none;
     color: white;
+
+    li {
+      @media (max-width: 576px) {
+        margin-right: 0;
+        margin-bottom: 10px;
+      }
+    }
+
+    @media ( max-width: 576px ) {
+      flex-wrap: wrap;
+    }
 
     a {
       text-decoration: none;
@@ -30,6 +42,10 @@
   padding: 10%;
   display: inline-flex;
   justify-content: flex-end;
+
+  @media (max-width: 576px) {
+    font-size: 1.5rem;
+  }
 }
 
 .cartCounter {
