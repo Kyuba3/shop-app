@@ -1,10 +1,12 @@
 import { useSelector, useDispatch } from "react-redux";
-import { Container, Card, Form, Button, CardImg, Row } from "react-bootstrap";
+import { Container, Card, Form, Button } from "react-bootstrap";
 import { removeProduct, updateQuantity, updateComment} from "../../../redux/cartRedux";
 import { getUser } from "../../../redux/usersRedux";
 import { NavLink } from "react-router-dom";
 import styles from './Cart.module.scss';
 import QuantitySelector from "../../features/QuantitySelector/QuantitySelector";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShoppingCart, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 const Cart = () => {
 
@@ -33,7 +35,7 @@ const Cart = () => {
 
   if(!user) {
     return (
-      <Container className="d-flex justify-content-center">
+      <Container fluid className="d-flex justify-content-center">
         <Card >
           <Card.Text className="d-flex justify-content-center mt-4 mx-4">
             Log in or register to make shopping!
@@ -50,80 +52,88 @@ const Cart = () => {
   }
 
   return (
-    <Container className="d-flex justify-content-center">
-      <Card>
+    <Container fluid className={styles.container}>
+      <Card className={styles.cartCard}>
         <Card.Body>
-          <Card.Title className="d-flex justify-content-center">Cart</Card.Title>
+          <Card.Title className={styles.cartTitle}>
+            <FontAwesomeIcon className={styles.cartIcon} icon={faShoppingCart} /> Your Cart
+          </Card.Title>
           {productsInCart.map((product) => {
             const totalPrice = product.price * product.quantity;
             const photo = product.image.split(",");
             const firstPhoto = photo[0];
 
             return (
-            <div key={product.id}>
-              <div className={`${styles.productItem} w-100`}>
-                <Card.Text className={`${styles.productText} w-100`}>
-                  <span className={styles.name}>Name: {product.name}</span>
-                  <CardImg 
-                    src={firstPhoto} 
-                    className={styles.cardImage} 
-                  />
-                </Card.Text>
+              <div key={product.id} className={styles.productItem}>
+                <div className={styles.productDetails}>
+                  <img src={firstPhoto} alt="Product" className={styles.productImage} />
+                  <div className={styles.productInfo}>
+                    <span className={styles.productName}>{product.name}</span>
+                    <span className={styles.productPrice}>Price: {product.price}$</span>
+                    <span className={styles.productTotalPrice}>
+                      Total price: {totalPrice}$
+                    </span>
+                    <Form.Group controlId={`description-${product.id}`}>
+                      <Form.Label>Comments</Form.Label>
+                      <Form.Control
+                        value={product.comment}
+                        as="textarea"
+                        rows={3}
+                        placeholder="Enter description"
+                        onChange={(e) => handleCommentChange(product.id, e.target.value)}
+                      />
+                    </Form.Group>
+                    <Form.Group controlId={`quantity-${product.id}`}>
+                      <Form.Label>Quantity</Form.Label>
+                      <div className={styles.quantitySelectorWrapper}>
+                        <QuantitySelector
+                          quantity={product.quantity}
+                          onDecrease={() => handleQuantityChange(product.id, product.quantity - 1)}
+                          onIncrease={() => handleQuantityChange(product.id, product.quantity + 1)}
+                          onChange={(e) => handleQuantityChange(product.id, parseInt(e.target.value))}
+                        />
+                      </div>
+                    </Form.Group>
+                  </div>
+                </div>
+                <div className={styles.actions}>
+                  <Button
+                    variant="danger"
+                    onClick={() => handleRemoveProduct(product.id)}
+                    className={styles.removeButton}
+                  >
+                    <FontAwesomeIcon icon={faTrashAlt} /> Remove
+                  </Button>
+                  <Button
+                    variant="success"
+                    className={styles.aboutButton}
+                    href={`/product/${product.id}`}
+                  >
+                    About this product
+                  </Button>
+                </div>
               </div>
-              <Card.Text>
-                <span className={styles.price}>Price: {product.price}$</span>
-              </Card.Text>
-              <Form.Group controlId={`description-${product.id}`}>
-                <Form.Label>Comments</Form.Label>
-                <Form.Control
-                  value={product.comment}
-                  as="textarea"
-                  rows={3}
-                  placeholder="Enter description"
-                  onChange={(e) => 
-                    handleCommentChange(product.id, e.target.value)
-                  }
-                />
-              </Form.Group>
-              <Form.Group controlId={`quantity-${product.id}`}>
-                <Form.Label>Quantity</Form.Label>
-                <QuantitySelector
-                  quantity={product.quantity}
-                  onDecrease={() => handleQuantityChange(product.id, product.quantity - 1)}
-                  onIncrease={() => handleQuantityChange(product.id, product.quantity + 1)}
-                  onChange={(e) => handleQuantityChange(product.id, parseInt(e.target.value))}
-                />
-              </Form.Group>
-              <Card.Text className="mt-2">
-                <b>Total price: {totalPrice}$</b>
-              </Card.Text>
-              <Button
-                variant="danger"
-                onClick={() => handleRemoveProduct(product.id)}
-                className="mt-3"
-              >
-                Remove
-              </Button>
-              <hr />
-            </div>
             );
           })}
-          
+
           {productsInCart.length === 0 && (
-            <>
-              <Row className="d-flex justify-content-center my-2">Your cart is empty.</Row>
+            <div className={styles.emptyCart}>
+              <p>Your cart is empty.</p>
               <NavLink to="/" className={styles.linkToHome}>
-                <Button variant="success" className={`w-100 ${styles.goToHomeButton}`}>Go to Home Page</Button>
+                <Button variant="success" className={styles.goToHomeButton}>
+                  Go to Home Page
+                </Button>
               </NavLink>
-            </>
+            </div>
           )}
-          <NavLink to={{
-            pathname: "/order",
-          }}>
-            <Button variant="dark" className={`px-2 py-2 ${styles.orderButton} w-100`}>
-              Go to Order Summary
-            </Button>
-          </NavLink>
+
+          <div className={styles.orderSummary}>
+            <NavLink to="/order">
+              <Button variant="dark" className={styles.orderButton}>
+                Go to Order Summary
+              </Button>
+            </NavLink>
+          </div>
         </Card.Body>
       </Card>
     </Container>

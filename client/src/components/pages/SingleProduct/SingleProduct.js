@@ -1,34 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { Col, Container, Card, Button, Form, Spinner, Row } from "react-bootstrap";
+import { Col, Container, Card, Button, Form, Spinner, Row, Alert } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { addProduct } from "../../../redux/cartRedux";
 import { getAll } from "../../../redux/cartRedux";
 import { getUser } from "../../../redux/usersRedux";
 import styles from './SingleProduct.module.scss';
-import moment from "moment";
 import { API_URL } from "../../../config";
 import QuantitySelector from "../../features/QuantitySelector/QuantitySelector";
 import Gallery from "../../features/Gallery/Gallery";
 
 const SingleProduct = () => {
-
   const productId = useParams();
   const dispatch = useDispatch();
 
-  const id = productId.id
+  const id = productId.id;
   const [quantity, setQuantity] = useState(1);
-  // eslint-disable-next-line no-unused-vars
-  const [comment, setComment] = useState("");
   const [productData, setProductData] = useState({});
   const [productError, setProductError] = useState(false);
   const [productLoading, setProductLoading] = useState(true);
+  const [status, setStatus] = useState(null);
 
   const productsInCart = useSelector(getAll);
   const user = useSelector(getUser);
-
-  
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -51,23 +46,26 @@ const SingleProduct = () => {
     fetchProduct();
   }, [id]);
 
-  const handleAddProduct = e => {
+  const handleAddProduct = (e) => {
     e.preventDefault();
 
-    if( quantity <= 0 ) {
+    if (quantity <= 0) {
       alert('You cant order 0 products!');
     }
 
-    const productToAdd = { ...productData, quantity, comment };
+    const productToAdd = { ...productData, quantity };
 
-    const isProductInCart = productsInCart.some(product => product.id === productToAdd.id);
-    if(isProductInCart) {
-      console.log('This product is already in Cart');
+    const isProductInCart = productsInCart.some((product) => product.id === productToAdd.id);
+    if (isProductInCart) {
+      setStatus('error');
+      setTimeout(() => {
+        setStatus(null);
+      }, 1700);
       return;
     }
 
     dispatch(addProduct(productToAdd));
-  }
+  };
 
   const increaseQuantity = () => {
     setQuantity(quantity + 1);
@@ -80,43 +78,55 @@ const SingleProduct = () => {
   };
 
   if (productLoading) {
-    return <Spinner animation="border" role="status" className="d-block mx-auto"/>
+    return <Spinner animation="border" role="status" className="d-block mx-auto" />;
   } else if (productError) {
     return <Container> Failed to load product data.</Container>;
-  } 
+  }
 
   return (
-    <Container fluid className="d-flex justify-content-center">
-      <Col xs="12" lg="10" xl="6" className={`mt-2 ${styles.productCard}`}>
+    <Container className={`d-flex justify-content-center ${styles.singleProductContainer}`}>
+      <Col xs="12" lg="10" xl="10" className={`mt-1 ${styles.productCard}`}>
         <Card>
-          <Card.Body>
-            <Card.Text className={`py-2 ${styles.price}`}> Price: {productData.price}$</Card.Text>
+          <Card.Body className={styles.cardBody}>
+            <Card.Title className={`py-2 ${styles.price}`}>Price: {productData.price}$</Card.Title>
             <Card.Subtitle>
               <span className={styles.name}>Name: {productData.name}</span>
             </Card.Subtitle>
-            <Card.Text>
+            <Card.Text className="mt-2">
               <span className={styles.description}>Description: {productData.description}</span>
             </Card.Text>
-            <Card.Text>
-              <span className={styles.createdAt}>CreatedAt: {moment(productData.createdAt).format("YYYY-MM-DD")}</span>
-            </Card.Text>
-            <Row>
+
+            {status === "error" && (
+              <Alert variant="danger" className="">
+                <Alert.Heading>This Product is already in cart!</Alert.Heading>
+                <p>You can't add the same product</p>
+              </Alert>
+            )}
+
+            <Row className={styles.galleryRow}>
               <Gallery photos={productData.image.split(",")} />
             </Row>
-            <Form onSubmit={handleAddProduct}>
-              <Form.Group controlId="quantity">
-                <Form.Label className={styles.quantity}>Quantity : </Form.Label>
-                  <QuantitySelector 
+            <Form onSubmit={handleAddProduct} className={styles.form}>
+              <Form.Group controlId="quantity" className={`d-flex align-items-center ${styles.quantityGroup}`}>
+                <Form.Label className={`my-2 ${styles.quantityLabel}`}>Quantity:</Form.Label>
+                <div className={styles.quantitySelectorWrapper}>
+                  <QuantitySelector
                     quantity={quantity}
                     onDecrease={decreaseQuantity}
                     onIncrease={increaseQuantity}
                     onChange={(e) => setQuantity(parseInt(e.target.value))}
                   />
+                </div>
               </Form.Group>
               {user && (
-                <Button variant="dark" type="submit" className={`my-3 py-3 ${styles.addButon} w-100`}>
-                  Add to cart
-                </Button>
+                <div className={styles.actions}>
+                  <Button variant="dark" type="submit" className={`my-3 py-3 w-50 ${styles.addButton}`}>
+                    Add to cart
+                  </Button>
+                  <Button variant="success" href="/cart" className={`my-3 py-3 w-50 ${styles.goToCartButton}`}>
+                    Go to cart
+                  </Button>
+                </div>
               )}
               {!user && (
                 <Card.Text className={`mt-2 ${styles.loginText}`}>

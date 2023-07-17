@@ -1,45 +1,54 @@
 .productWrapper {
-  display: flex;
-  flex-wrap: wrap;
+  width: 100%;
+  max-width: 550px;
+  margin: 0 auto;
+  padding: 10px;
+  position: relative;
   text-align: center;
-  height: 100%;
 }
 
-.card_wrapper {
-  margin: 10px;
-  display: flex;
-  flex-direction: column;
-  background-color: rgb(255, 255, 255);
-  border-style: 1px solid black;
-  height: 100%;
+.cardWrapper {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
-.card_wrapper .body {
-  flex-grow: 1;
+.spinnerOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
   display: flex;
-  flex-direction: column;
-  }
-
-.imagesRow {
-  height: 500px;
+  justify-content: center;
+  align-items: center;
 }
 
 .image {
+  width: 100%;
+  height: 200px;
   object-fit: contain;
+  margin-top: 20px;
 }
 
-.image:hover{
-  transform: scale(1.05);
+.body {
+  padding: 10px;
 }
- 
+
 .cardTitle {
+  font-size: 24px;
   font-weight: bold;
-  font-size: 2rem;
-  color: #333;
-  margin-bottom: -10px;
+  margin-bottom: 5px;
 }
 
-.cardSubtitle{
+.cardSubtitle {
+  font-size: 18px;
   color: #555;
-  font-size: 1.5rem;
+}
+
+.viewButton {
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  width: 100%;
 }

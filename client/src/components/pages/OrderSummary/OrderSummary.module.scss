@@ -1,0 +1,93 @@
+.orderCard {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin-top: 50px;
+  padding: 20px;
+}
+
+.orderTitle {
+  font-size: 36px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.orderSubtitle {
+  font-size: 24px;
+  color: #555;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.orderFormLabel {
+  font-size: 18px;
+  color: #555;
+  font-weight: bold;
+}
+
+.orderFormTextarea {
+  resize: none;
+  height: 100px;
+}
+
+.orderButtonWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.orderButton {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+  margin-right: 10px;
+}
+
+.orderButton.orderSuccess {
+  background-color: #66bb6a;
+  color: #fff;
+}
+
+.orderButton.orderSuccess:hover {
+  background-color: #43a047;
+}
+
+.orderButton.orderBack {
+  background-color: #333;
+  color: #fff;
+}
+
+.orderButton.orderBack:hover {
+  background-color: #111;
+}
+
+.orderSuccessMessage {
+  text-align: center;
+  font-size: 18px;
+  color: #43a047;
+  margin-top: 20px;
+}
+
+.orderErrorMessage {
+  text-align: center;
+  font-size: 18px;
+  color: #d32f2f;
+  margin-top: 20px;
+}
+
+.orderSubmitButton {
+  background-color: #333;
+  border-color: #333;
+  color: #fff;
+}
+
+.orderBackButton {
+  background-color: #28a745;
+  border-color: #28a745;
+  color: #fff;
+}

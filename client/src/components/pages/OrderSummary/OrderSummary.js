@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAll, removeAllProducts } from "../../../redux/cartRedux";
 import { Container, Card, Form, Button, Alert } from "react-bootstrap";
-import { API_URL } from "../../../config";;
+import { API_URL } from "../../../config";
+import styles from './OrderSummary.module.scss';
 
 const OrderSummary = () => {
 
@@ -52,8 +53,14 @@ const OrderSummary = () => {
         orderId = order.id;
       } else if ( orderResponse.status === 400) {
         setStatus('clientError');
+        setTimeout(() => {
+          setStatus(null);
+        }, 1700)
       } else {
         setStatus('serverError');
+        setTimeout(() => {
+          setStatus(null);
+        }, 1700)
       }
 
       productsInCart.forEach(async (product) => {
@@ -106,35 +113,36 @@ const OrderSummary = () => {
 
   return (
     <Container className="d-flex justify-content-center">
-      <Card>
+      <Card className={styles.orderCard}>
         <Card.Body>
-          <Card.Title>Order Summary</Card.Title>
-          <Card.Subtitle className="py-4">{renderOrderSummary()}</Card.Subtitle>
+          <Card.Title className={styles.orderTitle}>Order Summary</Card.Title>
+          <Card.Subtitle className={styles.orderSubtitle}>
+            {renderOrderSummary()}
+          </Card.Subtitle>
           <Form onSubmit={handleSubmit}>
-
             {status === "success" && (
-              <Alert variant="success">
+              <Alert variant="success" className={styles.orderSuccessMessage}>
                 <Alert.Heading>Success!</Alert.Heading>
                 <p>Your order has been successfully created</p>
               </Alert>
             )}
 
             {status === "serverError" && (
-              <Alert variant="danger">
+              <Alert variant="danger" className={styles.orderErrorMessage}>
                 <Alert.Heading>Something went wrong...</Alert.Heading>
                 <p>Unexpected err... Try again</p>
               </Alert>
             )}
 
             {status === "clientError" && (
-              <Alert variant="danger">
+              <Alert variant="danger" className={styles.orderErrorMessage}>
                 <Alert.Heading>Incorrect data</Alert.Heading>
                 <p>address or phone number are incorrect...</p>
               </Alert>
             )}
 
             <Form.Group controlId="address">
-              <Form.Label>Address</Form.Label>
+              <Form.Label className={styles.orderFormLabel}>Address</Form.Label>
               <Form.Control
                 type="text"
                 as="textarea"
@@ -146,7 +154,7 @@ const OrderSummary = () => {
               />
             </Form.Group>
             <Form.Group controlId="phoneNumber">
-              <Form.Label>Phone number</Form.Label>
+              <Form.Label className={styles.orderFormLabel}>Phone number</Form.Label>
               <Form.Control
                 type="text"
                 maxLength={12}
@@ -157,28 +165,28 @@ const OrderSummary = () => {
                 onChange={(e) => setPhoneNumber(e.target.value)}
               />
             </Form.Group>
-            <Form.Group controlId="notesForCurier">
-              <Form.Label>Notes for courier</Form.Label>
+            <Form.Group controlId="notesForCourier">
+              <Form.Label className={styles.orderFormLabel}>Notes for courier</Form.Label>
               <Form.Control
                 as="textarea"
                 maxLength={50}
                 type="text"
-                name="notesForCurier"
+                name="notesForCourier"
                 placeholder="floor, gate..."
                 value={notesForCurier}
                 onChange={(e) => setNotesForCurier(e.target.value)}
               />
             </Form.Group>
             {status !== 'success' && (
-              <Button variant="dark" type="submit" className="mt-3 w-100">
-                Order
-              </Button>
+              <div className={styles.orderButtonWrapper}>
+                <Button variant="dark" type="submit" className={`${styles.orderButton} ${styles.orderSubmitButton}`}>
+                  Order
+                </Button>
+                <Button variant="success" href="/" className={`${styles.orderButton} ${styles.orderBackButton}`}>
+                  Go back to home page
+                </Button>
+              </div>
             )}
-            {status === 'success' && ( 
-              <Button variant="success" type="submit" className="mt-3 w-100" href="/">
-                Go back to home page
-              </Button>
-            )} 
           </Form>
         </Card.Body>
       </Card>

@@ -12,8 +12,8 @@ const NavBar = () => {
   const user = useSelector(getUser);
 
   return (
-    <Navbar bg="dark" variant='dark' className={`mt-4 mb-4 rounded d-flex justify-content-between ${styles.navbarTop}`}>
-      <NavbarBrand className="justify-content-start px-3">
+    <Navbar bg="dark" variant='dark' className={`mt-2 mb-4 rounded d-flex justify-content-between ${styles.navbarTop}`}>
+      <NavbarBrand className="px-3">
         <NavLink to="/" className={styles.nav_links}>
           ShopAPP
         </NavLink>

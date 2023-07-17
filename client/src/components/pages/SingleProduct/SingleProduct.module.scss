@@ -1,64 +1,96 @@
-.productCard {
+.singleProductContainer {
   padding: 20px;
-  text-align: center;
+  display: flex;
+  justify-content: center;
 }
 
-.productImage {
-  max-width: 100%;
-  max-height: 250px;
-  object-fit: contain;
+.productCard {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+}
+
+.cardBody {
+  padding: 20px;
 }
 
 .price {
-  font-size: 4rem;
+  font-size: 24px;
   font-weight: bold;
-  color: #2d2d2d;
+  color: #333;
 }
 
 .name {
-  font-size: 3.5rem;
+  font-size: 24px;
   font-weight: bold;
-  color: #555;
+  color: #333;
 }
 
 .description {
-  color: #777;
-  font-weight: 700;
-  font-size: 2.5rem;
+  font-size: 16px;
+  color: #555;
 }
 
-.createdAt {
-  margin-top: 0.5rem;
-  color: #999;
+.galleryRow {
+  margin-top: 20px;
 }
 
-.quantity {
-  display: flex;
-  font-size: 1.5rem;
+.form {
+  margin-top: 20px;
 }
 
-.quantityInput {
+.quantityGroup {
   display: flex;
   align-items: center;
 }
 
-.quantityField {
-  width: 100%;
-  text-align: center;
-  margin: 0 0.5rem;
+.quantityLabel {
+  font-size: 18px;
+  color: #333;
+}
+
+.quantitySelectorWrapper {
+  flex: 1;
+}
+
+.addButton,
+.goToCartButton {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
 }
 
 .addButton {
+  background-color: #333;
+  color: #fff;
+}
+
+.addButton:hover {
+  background-color: #111;
+}
+
+.goToCartButton {
+  background-color: #66bb6a;
+  color: #fff;
+  margin-left: 10px;
+}
+
+.goToCartButton:hover {
+  background-color: #43a047;
+}
+
+.actions {
   display: flex;
-  width: 100%;
+  align-items: center;
+  margin-top: 20px;
 }
 
 .loginText {
-  margin-top: 2rem;
-  font-size: 1.2rem;
+  font-size: 16px;
   color: #555;
   text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  opacity: 0.7;
+  margin-top: 10px;
 }
