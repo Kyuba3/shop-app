@@ -6,6 +6,15 @@
   font-family: $font;
 }
 
+.unLoginCartCardForm {
+  max-width: 550px;
+  padding: 40px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(to bottom, #f5f5f5, #fff);
+}
+
 .cartCard {
   border: none;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -153,6 +162,35 @@
 .goToHomeButton:hover {
   background: linear-gradient(45deg, #ffb74d, #ff5252);
 }
+
+.goToLoginButton {
+  text-decoration: none;
+  color: #fff;
+  background-color: #66bb6a;
+  text-align: center;
+  padding: 10px;
+  border-radius: 8px;
+  margin: 0 10px 10px 10px;
+}
+
+.goToLoginButton:hover {
+  background-color: #43a047;
+}
+
+.goToRegisterButton {
+  text-decoration: none;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  border-radius: 8px;
+  margin: 0 10px 10px 10px;
+}
+
+.goToRegisterButton:hover {
+  background-color: #111;
+}
+
 
 .orderSummary {
   display: flex;

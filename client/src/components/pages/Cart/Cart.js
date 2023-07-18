@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { Container, Card, Form, Button } from "react-bootstrap";
+import { Container, Card, Form } from "react-bootstrap";
 import { removeProduct, updateQuantity, updateComment} from "../../../redux/cartRedux";
 import { getUser } from "../../../redux/usersRedux";
 import { NavLink } from "react-router-dom";
@@ -36,16 +36,16 @@ const Cart = () => {
   if(!user) {
     return (
       <Container fluid className="d-flex justify-content-center">
-        <Card >
+        <Card className={styles.unLoginCartCardForm}>
           <Card.Text className="d-flex justify-content-center mt-4 mx-4">
             Log in or register to make shopping!
           </Card.Text>
-          <Button variant="success" href="/login" className="mt-2 mx-4">
+          <NavLink to="/login" className={styles.goToLoginButton}>
             Go to Login Page
-          </Button>
-          <Button variant="warning" href="/register" className="mt-2 mx-4 my-4">
+          </NavLink>
+          <NavLink to="/register" className={styles.goToRegisterButton}>
             Go to Register Page
-          </Button>
+          </NavLink>
         </Card>
       </Container>
     )
