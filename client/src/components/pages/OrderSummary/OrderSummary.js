@@ -104,9 +104,12 @@ const OrderSummary = () => {
     return (
       <ul>
         {productsInCart.map((product) => (
-          <li key={product.id}>
-            <b>{product.name}</b> - Quantity: {product.quantity}, Price: {product.price * product.quantity}$, Comments: {product.comment}
-          </li>
+          <>
+            <li key={product.id}>
+              <b>{product.name}</b> - Quantity: {product.quantity}, Price: {product.price * product.quantity}$, Comments: {product.comment}
+            </li>
+            <span><img src={product.image.split(',')[0]} alt="phot" className={styles.image}/></span>
+          </>
         ))}
       </ul>
     );

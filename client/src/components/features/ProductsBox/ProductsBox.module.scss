@@ -1,3 +1,5 @@
+@import '../../../styles/global.scss';
+
 .productWrapper {
   width: 100%;
   max-width: 550px;
@@ -5,6 +7,7 @@
   padding: 10px;
   position: relative;
   text-align: center;
+  font-family: $font;
 }
 
 .cardWrapper {
@@ -36,7 +39,7 @@
 }
 
 .cardTitle {
-  font-size: 24px;
+  font-size: 26px;
   font-weight: bold;
   margin-bottom: 5px;
 }

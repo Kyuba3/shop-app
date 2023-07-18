@@ -80,11 +80,12 @@ const Cart = () => {
                         as="textarea"
                         rows={3}
                         placeholder="Enter description"
+                        className={styles.commentInput}
                         onChange={(e) => handleCommentChange(product.id, e.target.value)}
                       />
                     </Form.Group>
                     <Form.Group controlId={`quantity-${product.id}`}>
-                      <Form.Label>Quantity</Form.Label>
+                      <Form.Label className={styles.quantityLabel}>Quantity</Form.Label>
                       <div className={styles.quantitySelectorWrapper}>
                         <QuantitySelector
                           quantity={product.quantity}

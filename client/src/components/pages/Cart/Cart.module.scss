@@ -1,6 +1,9 @@
+@import '../../../styles/global.scss';
+
 .container {
   padding: 20px;
   background-color: #f7f7f7;
+  font-family: $font;
 }
 
 .cartCard {
@@ -59,6 +62,17 @@
   font-weight: bold;
   margin-top: 5px;
   margin-bottom: 5px;
+}
+
+.quantityLabel {
+  margin-top: 5px;
+  margin-bottom: -5px;
+}
+
+
+.commentInput {
+  resize: none;
+  height: 120px; 
 }
 
 .actions {

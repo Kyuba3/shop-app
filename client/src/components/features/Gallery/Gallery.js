@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Button, Container } from "react-bootstrap";
+import React, { useState } from "react";
+import { Container } from "react-bootstrap";
 import styles from './Gallery.module.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
@@ -32,18 +32,20 @@ const Gallery = ({ photos }) => {
         />
       </Container>
       <Container className={styles.buttonContainer}>
-        <Button 
+        <button 
+          type="button"
           variant="success" 
           className={styles.galleryButton} 
           onClick={goToPreviousPhoto}>
             <FontAwesomeIcon icon={faArrowLeft} />
-        </Button>
-        <Button 
+        </button >
+        <button
+          type="button" 
           variant="success" 
           className={styles.galleryButton} 
           onClick={goToNextPhoto}>
             <FontAwesomeIcon icon={faArrowRight} />
-        </Button>
+        </button >
       </Container>
     </Container>
   );
